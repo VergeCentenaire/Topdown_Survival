@@ -3,19 +3,19 @@ key_trigger {
   action: ""
 }
 key_trigger {
-  input: KEY_Z
+  input: KEY_UP
   action: "up"
 }
 key_trigger {
-  input: KEY_S
+  input: KEY_DOWN
   action: "down"
 }
 key_trigger {
-  input: KEY_D
+  input: KEY_RIGHT
   action: "right"
 }
 key_trigger {
-  input: KEY_Q
+  input: KEY_LEFT
   action: "left"
 }
 mouse_trigger {
