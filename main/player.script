@@ -1,0 +1,28 @@
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
+
+	-- movement input
+	self.input = vmath.vector3()
+
+	-- the current speed (pixels/second)
+	self.speed = 0
+end
+
+local function look_at(target_position)
+	
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("key_Z") then
+		self.input.y = 1
+		print("up")
+	elseif action_id == hash("S") then
+		self.input.y = -1
+		print("down")
+	elseif action_id == hash("Q") then
+		self.input.x = 1
+	elseif action_id == hash("D") then
+		self.input.x = -1
+	end
+end
