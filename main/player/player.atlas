@@ -8,7 +8,7 @@ images {
   image: "/assets/images/background.png"
 }
 animations {
-  id: "Upper Idle"
+  id: "idle"
   images {
     image: "/assets/images/Top_Down_Survivor/handgun/idle/survivor-idle_handgun_1.png"
   }
@@ -70,7 +70,7 @@ animations {
   fps: 10
 }
 animations {
-  id: "Upper Shoot"
+  id: "shoot"
   images {
     image: "/assets/images/Top_Down_Survivor/handgun/shoot/survivor-shoot_handgun_0.png"
   }
@@ -84,7 +84,7 @@ animations {
   fps: 6
 }
 animations {
-  id: "Upper  Walk"
+  id: "walk"
   images {
     image: "/assets/images/Top_Down_Survivor/handgun/move/survivor-move_handgun_0.png"
   }
@@ -146,71 +146,6 @@ animations {
     image: "/assets/images/Top_Down_Survivor/handgun/move/survivor-move_handgun_19.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 20
-}
-animations {
-  id: "Lower Walk"
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_0.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_1.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_2.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_3.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_4.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_5.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_6.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_7.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_8.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_9.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_10.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_11.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_12.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_13.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_14.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_15.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_16.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_17.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_18.png"
-  }
-  images {
-    image: "/assets/images/Top_Down_Survivor/feet/walk/survivor-walk_19.png"
-  }
-  playback: PLAYBACK_LOOP_FORWARD
-  fps: 20
+  fps: 25
 }
 extrude_borders: 2

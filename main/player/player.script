@@ -1,115 +1,74 @@
-local shot_interval = 2 --second
-
+shoot_cooldown = .2 --seconds
 player_rotation = vmath.quat()
+base_speed = 2
+walk_speed = base_speed
+sprint_speed = base_speed * 2.5
 
 function init(self)
-	msg.post(".", "acquire_input_focus")
 	msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
-	msg.post("@render", "use_camera_projection")
-	msg.post("operator#camera", "acquire_camera_focus")
+	msg.post(".", "acquire_input_focus")
 
+	--initialize the player rotation
 	player_rotation = go.get_rotation()
-	
-	--set move variables
-	self.moving = false
-	self.input = vmath.vector3()
-	self.dir = vmath.vector3(0, 1, 0)
-	self.speed = 100
 
-	--fire cooldown
-	self.last_shot = 0
+	--initializing move properties
+	self.speed = walk_speed
+	self.is_moving = false
+
+	--initializing player state
+	self.fire = false
+	self.last_shot = 0 --because no shot has been fired for now
+end
+
+function on_input(self, action_id, action)
+	--get current game object's position
+	local player_position = go.get_position()
+
+	--enable sprinting when key is pressed, reset speed value to walk
+	if action_id == hash("run") and action.pressed then
+		self.speed = sprint_speed
+	elseif action_id == hash("run") and action.released then
+		self.speed = walk_speed
+	end
+
+	--move on x and y by adding speed value (sprint or not) to the player position
+	if action_id == hash("right") then
+		player_position.x = player_position.x + self.speed
+		sprite.play_flipbook("/player#upper_body", "walk")
+	elseif action_id == hash("left") then
+		player_position.x = player_position.x - self.speed
+	elseif action_id == hash("up") then
+		player_position.y = player_position.y + self.speed
+	elseif action_id == hash("down") then
+		player_position.y = player_position.y - self.speed
+	end
+
+	--enable to shoot
+	if action_id == hash("touch") and action.released then
+
+		--tracks current time
+		local now = socket.gettime()
+
+		if now > (self.last_shot + shoot_cooldown) then
+			self.last_shot = now --current time is now used as a value for last_shot and will be inferior to the next one
+			print("Fire!")
+		end
+	end
+	
+	--set the new position of the current game object, the player
+	go.set_position(player_position)
+end
+
+function update(self, dt)
+	
+end
+
+function fixed_update(self, dt)
+	--get current player rotation of the player, each frame
+	player_rotation = go.get_rotation()
+	print(player_rotation)
 end
 
 function final(self)
 	msg.post(".", "release_input_focus")
-end
-
-function update(self, dt)
-	-- get current rotation of the player, each frame
-	player_rotation = go.get_rotation()
-	
-	if self.moving then
-		local pos = go.get_position()
-		pos = pos + self.dir * self.speed * dt
-		go.set_position(pos)
-	end
-
-	self.input.x = 0
-	self.input.y = 0
-	self.moving = false
-end
-
-function fixed_update(self, dt)
-	print()
-end
-
-function look_at(target_position)
-	-- own positon
-	local my_position = go.get_position()
-
-	-- calculate the angle that this object has to rotate to look at the given point
-	local angle = math.atan2(my_position.x - target_position.x, target_position.y - my_position.y)
-	-- set rotation as a quaternion
-	go.set_rotation(vmath.quat_rotation_z(angle))
-end
-
-
-function on_input(self, action_id, action)
-	if action_id == hash("up") then
-		self.input.y = 1
-	elseif action_id == hash("down") then
-		self.input.y = -1
-	elseif action_id == hash("left") then
-		self.input.x = -1
-	elseif action_id == hash("right") then
-		self.input.x = 1
-	end
-
-	if action_id == hash("touch") and action.released then
-		--get current time in seconds
-		local now = socket.gettime()
-		
-		--shoot if the current time is more than the last time a shot was fired plus the minimum interval
-		if now > (self.last_shot + shot_interval) then
-			print("Shoot!")
-			self.last_shot = now
-		end
-		
-		-- position bullet somewhat offset from the player position
-		local pos = go.get_position()
-		pos.y = pos.y + 50
-
-		-- spawn a bullet
-		local bullet_id = factory.create("#bulletfactory", pos)
-
-		-- animate the bullet
-		local distance = 1000                   -- distance in pixels
-		local speed = 800                       -- pixels per second
-		local duration = distance / speed       -- time in second to travel the full distance
-		local to = pos.y + distance
-
-		-- start animation and delete bullet when it has reached its destination
-		go.animate(bullet_id, "position.y", go.PLAYBACK_ONCE_FORWARD, to, go.EASING_LINEAR, duration, 0, function()
-			go.delete(bullet_id)
-		end)
-		timer.delay(1, false, function ()
-			print("cooldown")
-		end)
-	end
-
-	-- mouse/finger movement has action_id set to nil
-	if not action_id then
-		-- the position to look at (mouse/finger)
-		local target_position = vmath.vector3(action.x, action.y, 0)
-		-- rotate this object to look at the target position
-		-- look_at(target_position)
-		player_rotation = math.atan2(target_position.y - go.get_position().y, target_position.x - go.get_position().x)
-		go.set_rotation(vmath.quat_rotation_z(player_rotation))  -- Tourner l'objet en fonction de la souris
-		print(player_rotation)
-	end
-
-	if vmath.length(self.input) > 0 then
-		self.moving = true
-		self.dir = vmath.normalize(self.input)
-	end
 end
