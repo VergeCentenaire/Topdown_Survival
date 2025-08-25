@@ -103,16 +103,6 @@ embedded_instances {
   "  id: \"camera1\"\n"
   "  component: \"/main/player/camera.script\"\n"
   "}\n"
-  "embedded_components {\n"
-  "  id: \"camera\"\n"
-  "  type: \"camera\"\n"
-  "  data: \"aspect_ratio: 1.0\\n"
-  "fov: 6.7854\\n"
-  "near_z: 0.1\\n"
-  "far_z: 1000.0\\n"
-  "orthographic_projection: 1\\n"
-  "\"\n"
-  "}\n"
   ""
   position {
     x: 228.0
