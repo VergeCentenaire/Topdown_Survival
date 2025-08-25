@@ -1,10 +1,14 @@
 local shot_interval = 2 --second
 
+player_rotation = vmath.quat()
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
 	msg.post("@render", "use_camera_projection")
 	msg.post("operator#camera", "acquire_camera_focus")
+
+	player_rotation = go.get_rotation()
 	
 	--set move variables
 	self.moving = false
@@ -21,10 +25,8 @@ function final(self)
 end
 
 function update(self, dt)
-	--get our world mouse position
-	local screen_width, screen_height = window.get_size()
-	local screen_center = vmath.vector3(screen_width / 2, screen_height / 2, 0)
-	
+	-- get current rotation of the player, each frame
+	player_rotation = go.get_rotation()
 	
 	if self.moving then
 		local pos = go.get_position()
@@ -35,6 +37,10 @@ function update(self, dt)
 	self.input.x = 0
 	self.input.y = 0
 	self.moving = false
+end
+
+function fixed_update(self, dt)
+	print()
 end
 
 function look_at(target_position)
@@ -81,6 +87,7 @@ function on_input(self, action_id, action)
 		local speed = 800                       -- pixels per second
 		local duration = distance / speed       -- time in second to travel the full distance
 		local to = pos.y + distance
+
 		-- start animation and delete bullet when it has reached its destination
 		go.animate(bullet_id, "position.y", go.PLAYBACK_ONCE_FORWARD, to, go.EASING_LINEAR, duration, 0, function()
 			go.delete(bullet_id)
@@ -95,7 +102,10 @@ function on_input(self, action_id, action)
 		-- the position to look at (mouse/finger)
 		local target_position = vmath.vector3(action.x, action.y, 0)
 		-- rotate this object to look at the target position
-		look_at(target_position)
+		-- look_at(target_position)
+		player_rotation = math.atan2(target_position.y - go.get_position().y, target_position.x - go.get_position().x)
+		go.set_rotation(vmath.quat_rotation_z(player_rotation))  -- Tourner l'objet en fonction de la souris
+		print(player_rotation)
 	end
 
 	if vmath.length(self.input) > 0 then

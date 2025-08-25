@@ -65,10 +65,6 @@ embedded_instances {
   "  position {\n"
   "    z: 0.1\n"
   "  }\n"
-  "  rotation {\n"
-  "    z: 0.70710677\n"
-  "    w: 0.70710677\n"
-  "  }\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"Lower Body\"\n"
@@ -91,6 +87,10 @@ embedded_instances {
   position {
     x: 227.0
     y: 165.0
+  }
+  rotation {
+    z: 0.70710677
+    w: 0.70710677
   }
   scale3 {
     x: 0.5
