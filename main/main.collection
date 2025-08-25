@@ -7,6 +7,14 @@ instances {
     y: 663.5533
   }
 }
+instances {
+  id: "bullet"
+  prototype: "/main/player/bullet/bullet.go"
+  position {
+    x: 400.9409
+    y: 146.60692
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "map"
@@ -21,6 +29,7 @@ embedded_instances {
 }
 embedded_instances {
   id: "player"
+  children: "bullet_factory"
   data: "components {\n"
   "  id: \"player\"\n"
   "  component: \"/main/player/player.script\"\n"
@@ -77,12 +86,6 @@ embedded_instances {
   "}\\n"
   "\"\n"
   "}\n"
-  "embedded_components {\n"
-  "  id: \"bulletfactory\"\n"
-  "  type: \"factory\"\n"
-  "  data: \"prototype: \\\"/main/player/bullet/bullet.go\\\"\\n"
-  "\"\n"
-  "}\n"
   ""
   position {
     x: 227.0
@@ -108,5 +111,19 @@ embedded_instances {
     x: 228.0
     y: 155.0
     z: 621.1
+  }
+}
+embedded_instances {
+  id: "bullet_factory"
+  data: "embedded_components {\n"
+  "  id: \"factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/player/bullet/bullet.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 116.0
+    y: -55.0
   }
 }

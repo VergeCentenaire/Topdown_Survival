@@ -1,4 +1,7 @@
+bullet_speed = 3
+
 function init(self)
+	--go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, bullet_speed, go.EASING_LINEAR, 1)
 end
 
 function final(self)
@@ -8,18 +11,14 @@ function final(self)
 end
 
 function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	local bullet_position = go.get_position()
+	
+	bullet_position.y = bullet_position.y + bullet_speed
+	go.set_position(bullet_position)
 end
 
 function fixed_update(self, dt)
-	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
-	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
-	-- Physics section of game.project
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+
 end
 
 function on_message(self, message_id, message, sender)
