@@ -1,63 +1,122 @@
 name: "main"
+instances {
+  id: "enemy"
+  prototype: "/main/enemy/enemy.go"
+  position {
+    x: 230.16037
+    y: 663.5533
+  }
+}
 scale_along_z: 0
+embedded_instances {
+  id: "map"
+  data: "components {\n"
+  "  id: \"map\"\n"
+  "  component: \"/main/map.tilemap\"\n"
+  "}\n"
+  ""
+  position {
+    z: -0.1
+  }
+}
 embedded_instances {
   id: "player"
   data: "components {\n"
   "  id: \"player\"\n"
-  "  component: \"/main/player.script\"\n"
+  "  component: \"/main/player/player.script\"\n"
   "}\n"
   "embedded_components {\n"
-  "  id: \"sprite-upper\"\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"default\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "      y: -14.0\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "    id: \\\"player hitbox\\\"\\n"
+  "  }\\n"
+  "  data: 62.0\\n"
+  "  data: 53.0\\n"
+  "  data: 10.0\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"Upper body\"\n"
   "  type: \"sprite\"\n"
   "  data: \"default_animation: \\\"Upper Idle\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "textures {\\n"
   "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/main/main.atlas\\\"\\n"
+  "  texture: \\\"/main/player/player.atlas\\\"\\n"
   "}\\n"
   "\"\n"
+  "  position {\n"
+  "    z: 0.1\n"
+  "  }\n"
   "  rotation {\n"
   "    z: 0.70710677\n"
   "    w: 0.70710677\n"
   "  }\n"
-  "  scale {\n"
-  "    x: 0.5\n"
-  "    y: 0.5\n"
-  "    z: 0.5\n"
-  "  }\n"
   "}\n"
   "embedded_components {\n"
-  "  id: \"sprite-lower\"\n"
+  "  id: \"Lower Body\"\n"
   "  type: \"sprite\"\n"
   "  data: \"default_animation: \\\"survivor-idle_0\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "textures {\\n"
   "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/main/main.atlas\\\"\\n"
+  "  texture: \\\"/main/player/player.atlas\\\"\\n"
   "}\\n"
   "\"\n"
-  "  position {\n"
-  "    z: -0.1\n"
-  "  }\n"
-  "  rotation {\n"
-  "    z: 0.70710677\n"
-  "    w: 0.70710677\n"
-  "  }\n"
-  "  scale {\n"
-  "    x: 0.5\n"
-  "    y: 0.5\n"
-  "    z: 0.5\n"
-  "  }\n"
   "}\n"
   "embedded_components {\n"
-  "  id: \"factory_bullet\"\n"
+  "  id: \"bulletfactory\"\n"
   "  type: \"factory\"\n"
-  "  data: \"prototype: \\\"\\\"\\n"
+  "  data: \"prototype: \\\"/main/player/bullet/bullet.go\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 501.0
-    y: 307.0
+    x: 227.0
+    y: 165.0
+  }
+  scale3 {
+    x: 0.5
+    y: 0.5
+  }
+}
+embedded_instances {
+  id: "camera operator"
+  data: "components {\n"
+  "  id: \"camera1\"\n"
+  "  component: \"/main/player/camera.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"camera\"\n"
+  "  type: \"camera\"\n"
+  "  data: \"aspect_ratio: 1.0\\n"
+  "fov: 6.7854\\n"
+  "near_z: 0.1\\n"
+  "far_z: 1000.0\\n"
+  "orthographic_projection: 1\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 228.0
+    y: 155.0
+    z: 621.1
   }
 }

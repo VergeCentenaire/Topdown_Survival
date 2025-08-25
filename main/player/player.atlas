@@ -4,6 +4,9 @@ images {
 images {
   image: "/builtins/graphics/particle_blob.png"
 }
+images {
+  image: "/assets/images/background.png"
+}
 animations {
   id: "Upper Idle"
   images {

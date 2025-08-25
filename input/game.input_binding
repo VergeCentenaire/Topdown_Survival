@@ -1,8 +1,4 @@
 key_trigger {
-  input: KEY_SPACE
-  action: ""
-}
-key_trigger {
   input: KEY_UP
   action: "up"
 }
