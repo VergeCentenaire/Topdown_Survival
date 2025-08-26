@@ -7,14 +7,6 @@ instances {
     y: 663.5533
   }
 }
-instances {
-  id: "bullet"
-  prototype: "/main/player/bullet/bullet.go"
-  position {
-    x: 400.9409
-    y: 146.60692
-  }
-}
 scale_along_z: 0
 embedded_instances {
   id: "map"
@@ -72,7 +64,7 @@ embedded_instances {
   "}\\n"
   "\"\n"
   "  position {\n"
-  "    z: 0.1\n"
+  "    z: -0.1\n"
   "  }\n"
   "}\n"
   "embedded_components {\n"
@@ -85,6 +77,9 @@ embedded_instances {
   "  texture: \\\"/main/player/player.atlas\\\"\\n"
   "}\\n"
   "\"\n"
+  "  position {\n"
+  "    z: -0.4\n"
+  "  }\n"
   "}\n"
   ""
   position {
@@ -98,19 +93,6 @@ embedded_instances {
   scale3 {
     x: 0.5
     y: 0.5
-  }
-}
-embedded_instances {
-  id: "camera operator"
-  data: "components {\n"
-  "  id: \"camera1\"\n"
-  "  component: \"/main/player/camera.script\"\n"
-  "}\n"
-  ""
-  position {
-    x: 228.0
-    y: 155.0
-    z: 621.1
   }
 }
 embedded_instances {

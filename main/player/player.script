@@ -43,21 +43,30 @@ function on_input(self, action_id, action)
 		player_position.y = player_position.y - self.speed
 	end
 
+	--track the last cursor position on the screen
+	if not action_id then
+		local target_position = vmath.vector3(action.x, action.y, 0)
+		print("player rotation", target_position)
+		
+		--calculate the player rotation
+		player_rotation = math.atan2(target_position.y - go.get_position().y, target_position.x - go.get_position().x)
+		go.set_rotation(vmath.quat_rotation_z(player_rotation))
+	end
+
 	--enable to shoot
 	if action_id == hash("touch") and action.released then
-
 		--tracks current time
 		local now = socket.gettime()
 		--get the world position of the child factory game object
 		local bullet_factory = go.get_world_position("/bullet_factory")
-		
 
+		--current time is now used as a value for last_shot and will be inferior to the next one
 		if now > (self.last_shot + shoot_cooldown) then
-			self.last_shot = now --current time is now used as a value for last_shot and will be inferior to the next one
+			self.last_shot = now 
 			print("Fire!")
 
 			--trigger factory on bullet factory game object position
-			factory.create("/bullet_factory#factory", bullet_factory, player_rotation, nil, 1)
+			factory.create("/bullet_factory#factory", bullet_factory, nil, player_rotation, .6)
 		else
 			--if not firing then it's cooling down
 			print("Cooldown")
