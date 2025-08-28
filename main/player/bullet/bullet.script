@@ -1,8 +1,8 @@
-bullet_speed = 20
+go.property("direction", vmath.vector3())
+local bullet_speed = 20
 
 function init(self)
 	--go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, bullet_speed, go.EASING_LINEAR, 1)
-	bullet_position = go.get_position()
 end
 
 function final(self)
@@ -12,9 +12,9 @@ function final(self)
 end
 
 function update(self, dt)
-	bullet_position.y = bullet_position.y + bullet_speed
-	go.set_position(bullet_position)
-	
+	local pos = go.get_position()
+	pos = pos + self.direction * bullet_speed
+	go.set_position(pos)
 end
 
 function fixed_update(self, dt)
