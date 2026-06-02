@@ -1,5 +1,5 @@
 go.property("direction", vmath.vector3())
-local bullet_speed = 20
+local bullet_speed = 50
 
 function init(self)
 	--go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, bullet_speed, go.EASING_LINEAR, 1)
